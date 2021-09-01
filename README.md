@@ -10,7 +10,10 @@ Raw data can be downloaded from NCBI BioProject (PRJNA758084).
 
 We cleaned both genomic data and RNA-seq data using Trimmomatic version 0.38. For example, we used the following commands for the Geopemphigus genome: 
 
+        # For genomic data
         java -jar trimmomatic-0.38.jar PE -phred33 Geo_1.fastq.gz Geo_2.fastq.gz Geo_pe.1.fq.gz Geo_se.1.fq.gz Geo_pe.2.fq.gz Geo_se.2.fq.gz ILLUMINACLIP:/adapters/combined.fa:2:30:10:8:TRUE LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
+        # For RNA-seq data
+        java -jar trimmomatic-0.38.jar PE -phred33 Geo_RNA_1.fastq.gz Geo_RNA_2.fastq.gz Geo_RNA_pe.1.fq.gz Geo_RNA_se.1.fq.gz Geo_RNA_pe.2.fq.gz Geo_RNA_se.2.fq.gz ILLUMINACLIP:/adapters/combined.fa:2:30:10:8:TRUE LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
   
 
 ### 1.2 - Genome assembly
