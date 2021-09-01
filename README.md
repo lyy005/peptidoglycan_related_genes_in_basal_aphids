@@ -1,4 +1,4 @@
-# Analytical pipeline of the 
+# The distribution of peptidoglycan related genes in aphids and Buchnera 
 
 This document is a walkthrough of the methods and code used to analyze the peptidoglycan related genes in aphid genomes and Bunchnera genomes.
 
