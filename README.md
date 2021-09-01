@@ -30,9 +30,24 @@ The resulting assemblies are named **P_RNA_scaffold.fasta** under the ./run1/ fo
 ### 1.3 - Contamination removal using BlobTools version 1.1.1
 
 BLAST final assemblies against nt database
-        # download NT database locally: 
+        
+        # download NT database locally 
         /home/BLAST/ncbi-blast-2.9.0+/bin/update_blastdb.pl --decompress --blastdb_version 5 nt
-        /home/ncbi-blast-2.11.0+/bin/blastn -task megablast -query P_RNA_scaffold.mask.fasta -db /home/nt_database/nt -outfmt '6 qseqid staxids bitscore std sscinames sskingdoms stitle' -culling_limit 5 -num_threads 40 -evalue 1e-25 -out assembly_vs_nt.cul5.1e25.megablast.out
+        
+        /home/ncbi-blast-2.11.0+/bin/blastn -task megablast -query P_RNA_scaffold.mask.fasta -db nt -outfmt '6 qseqid staxids bitscore std sscinames sskingdoms stitle' -culling_limit 5 -num_threads 40 -evalue 1e-25 -out assembly_vs_nt.cul5.1e25.megablast.out
+
+Estimating sequencing depth: 
+        bwa mem -t 50 -o Geo_pe.sam P_RNA_scaffold.fasta Geo_pe.1.fq.gz Geo_pe.2.fq.gz
+
+        samtools view -h -b -S Geo_pe.sam -o Geo_pe.bam --threads 20
+        samtools sort Geo_pe.bam -o Geo_pe.sorted.bam --threads 20
+        samtools index Geo_pe.sorted.bam
+
+Create Blobplots:
+
+        blobtools create -i scaffolds.fasta -b Geo_pe.sorted.bam -t discovar_vs_nt.cul5.1e25.megablast.out -o blob_out
+        
+        
 
 
 
