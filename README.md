@@ -58,12 +58,19 @@ Create Blobplots:
 For *Chaitophorus*, an extra filtering was used to map the assembly to the Pemphigus assembly
         blastn -query Geo.genome.fasta -db Pem.genome.fasta -out Cha.scaf2genome.out -evalue 1e-10 -outfmt "6 qlen slen qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore" -num_threads 32
 
-Assign scaffolds as Pemphigus contaminations (1) if the scaffold > 1000bp, has 1000 bp alignment and >= 95% identity (2) or if shorter than 1000bp, with >= 95% identity
+Assign scaffolds as *Pemphigus* contaminations (1) if the scaffold > 1000bp, has 1000 bp alignment and >= 95% identity (2) or if shorter than 1000bp, with >= 95% identity
 
         perl filter_scaffolds.alignment_only.pl Cha.scaf2genome.out ../blob_taxonomy.blob_out.blobDB.table.txt Cha.scaf2genome.out.list 
         cat Cha.scaf2genome.out.list.Blast Cha.scaf2genome.out.list.Blast.short | awk '{print $3}' | uniq > Cha.PemContam.list
 
-Lastly, any 
+Lastly, any scaffolds that are identified as contamination will be removed: 
+        # Extract scaffold IDs with primate or bacteria origin
+        grep 'Primate\|Homo' blob_taxonomy.blob_out.blobDB.table.txt > Primate.blob.list
+        grep "Bacteria" blob_taxonomy.blob_out.blobDB.table.txt > Bacteria.blob.list
+        perl pick_sequences_NOT_on_list.pl Geo.genome.fasta Bacteria.list Chaitophorus_decon1.decontam.mask.fasta
+        
+        # For Chaitophorus, contaminated scaffolds from Pemphigus are also removed
+        perl pick_sequences_NOT_on_list.pl Cha.genome.fasta Cha.PemContam.list Chaitophorus_decon1.decontam.mask.fasta
 
 
   
