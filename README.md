@@ -38,7 +38,6 @@ BLAST final assemblies against nt database
         
         # download NT database locally 
         /home/BLAST/ncbi-blast-2.9.0+/bin/update_blastdb.pl --decompress --blastdb_version 5 nt
-        
         /home/ncbi-blast-2.11.0+/bin/blastn -task megablast -query Geo.genome.fasta -db nt -outfmt '6 qseqid staxids bitscore std sscinames sskingdoms stitle' -culling_limit 5 -num_threads 40 -evalue 1e-25 -out assembly_vs_nt.cul5.1e25.megablast.out
 
 Estimating sequencing depth: 
