@@ -74,7 +74,7 @@ Lastly, any scaffolds that are identified as contamination will be removed:
 
 ## 2 - Aphid genome annotation
 
-Repeat masking
+Repeat masking using Tantan implemented in Funannotate https://github.com/nextgenusfs/funannotate
 
         funannotate-docker mask -i P_RNA_scaffold.sort.fasta -o P_RNA_scaffold.mask.fasta
         
