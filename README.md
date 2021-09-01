@@ -17,22 +17,22 @@ We cleaned both genomic data and RNA-seq data using Trimmomatic version 0.38. Fo
 
 We first assembled draft genomes based on the genomic data using SPADES: 
 
-  spades.py -1 Geo_pe.1.fq.gz -2 Geo_pe.2.fq.gz --s1 Geo_se.1.fq.gz --s2 Geo_se.2.fq.gz -o run1_spades_out --threads 48 --memory 300 -k 21,33,55,77,99,127
+        spades.py -1 Geo_pe.1.fq.gz -2 Geo_pe.2.fq.gz --s1 Geo_se.1.fq.gz --s2 Geo_se.2.fq.gz -o run1_spades_out --threads 48 --memory 300 -k 21,33,55,77,99,127
 
 Then we use RNA-seq data to scaffold the draft genome assemblies with P_RNA_scaffolder (https://github.com/CAFS-bioinformatics/P_RNA_scaffolder): 
   
-  hisat2 -x scaffolds.fasta -1 Geo_RNA_pe.1.fq.gz -2 Geo_RNA_pe.2.fq.gz -k 3 -p 10 --pen-noncansplice 1000000 -S input.sam
+        hisat2 -x scaffolds.fasta -1 Geo_RNA_pe.1.fq.gz -2 Geo_RNA_pe.2.fq.gz -k 3 -p 10 --pen-noncansplice 1000000 -S input.sam
 
-  bash /home/P_RNA_scaffolder.sh -d /stor/work/Ochman/yli19/projects/tom_aphid_genomes/bin/P_RNA_scaffolder/P_RNA_scaffolder/ -i input.sam -j discovar.fasta -F Geo_RNA_pe.1.fq.gz -R Geo_RNA_pe.2.fq.gz -o ./run1/
+        bash /home/P_RNA_scaffolder.sh -d /stor/work/Ochman/yli19/projects/tom_aphid_genomes/bin/P_RNA_scaffolder/P_RNA_scaffolder/ -i input.sam -j discovar.fasta -F Geo_RNA_pe.1.fq.gz -R Geo_RNA_pe.2.fq.gz -o ./run1/
   
 The resulting assemblies are named **P_RNA_scaffold.fasta** under the ./run1/ folder. 
 
 ### 1.3 - Contamination removal using BlobTools version 1.1.1
 
 BLAST final assemblies against nt database
-  # download NT database locally: 
-  /home/BLAST/ncbi-blast-2.9.0+/bin/update_blastdb.pl --decompress --blastdb_version 5 nt
-  /home/ncbi-blast-2.11.0+/bin/blastn -task megablast -query P_RNA_scaffold.mask.fasta -db /home/nt_database/nt -outfmt '6 qseqid staxids bitscore std sscinames sskingdoms stitle' -culling_limit 5 -num_threads 40 -evalue 1e-25 -out assembly_vs_nt.cul5.1e25.megablast.out
+        # download NT database locally: 
+        /home/BLAST/ncbi-blast-2.9.0+/bin/update_blastdb.pl --decompress --blastdb_version 5 nt
+        /home/ncbi-blast-2.11.0+/bin/blastn -task megablast -query P_RNA_scaffold.mask.fasta -db /home/nt_database/nt -outfmt '6 qseqid staxids bitscore std sscinames sskingdoms stitle' -culling_limit 5 -num_threads 40 -evalue 1e-25 -out assembly_vs_nt.cul5.1e25.megablast.out
 
 
 
