@@ -72,9 +72,15 @@ Lastly, any scaffolds that are identified as contamination will be removed:
         # For Chaitophorus, contaminated scaffolds from Pemphigus are also removed
         perl pick_sequences_NOT_on_list.pl Cha.genome.fasta Cha.PemContam.list Chaitophorus_decon1.decontam.mask.fasta
 
-
-  
 ## 2 - Aphid genome annotation
+
+Repeat masking
+
+        funannotate-docker mask -i P_RNA_scaffold.sort.fasta -o P_RNA_scaffold.mask.fasta
+        
+Gene annotation using BRAKER version 2.1.5
+
+        time perl /home/BRAKER/scripts/braker.pl --genome P_RNA_scaffold.mask.fasta --bam combined.sorted.bam --softmasking --cores 48 --workingdir run1 --species cha_spadesrna_prot --GENEMARK_PATH=/home/GeneMark/gmes_linux_64/ --prot_seq=protein_evidence_for_annotation.fasta --etpmode --PROTHINT_PATH=/home/ProtHint/ProtHint/bin/
 
 ## 3 - Aphid orthologous assignment
 
