@@ -1,16 +1,16 @@
 # Analytical pipeline of the 
 
-# 1 - Aphid genome assembly
+## 1 - Aphid genome assembly
 
-# 2 - Aphid genome annotation
+## 2 - Aphid genome annotation
 
-# 3 - Aphid orthologous assignment
+## 3 - Aphid orthologous assignment
 
-# 4 - Aphid phylogeny construction
+## 4 - Aphid phylogeny construction
 
-# 5 - Buchnera genome assembly
+## 5 - Buchnera genome assembly
 
-# 6 - Buchnera genome annotation
+## 6 - Buchnera genome annotation
 
 
 
