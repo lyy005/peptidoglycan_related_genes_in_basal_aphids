@@ -63,6 +63,7 @@ Assign scaffolds as *Pemphigus* contaminations (1) if the scaffold > 1000bp, has
         cat Cha.scaf2genome.out.list.Blast Cha.scaf2genome.out.list.Blast.short | awk '{print $3}' | uniq > Cha.PemContam.list
 
 Lastly, any scaffolds that are identified as contamination will be removed: 
+        
         # Extract scaffold IDs with primate or bacteria origin
         grep 'Primate\|Homo' blob_taxonomy.blob_out.blobDB.table.txt > Primate.blob.list
         grep "Bacteria" blob_taxonomy.blob_out.blobDB.table.txt > Bacteria.blob.list
