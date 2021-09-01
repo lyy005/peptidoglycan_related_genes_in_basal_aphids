@@ -22,7 +22,6 @@ We first assembled draft genomes based on the genomic data using SPADES version 
 Then we use RNA-seq data to scaffold the draft genome assemblies with P_RNA_scaffolder (https://github.com/CAFS-bioinformatics/P_RNA_scaffolder): 
   
         hisat2 -x scaffolds.fasta -1 Geo_RNA_pe.1.fq.gz -2 Geo_RNA_pe.2.fq.gz -k 3 -p 10 --pen-noncansplice 1000000 -S input.sam
-
         bash /home/P_RNA_scaffolder.sh -d /stor/work/Ochman/yli19/projects/tom_aphid_genomes/bin/P_RNA_scaffolder/P_RNA_scaffolder/ -i input.sam -j discovar.fasta -F Geo_RNA_pe.1.fq.gz -R Geo_RNA_pe.2.fq.gz -o ./run1/
   
 The resulting assemblies are named **P_RNA_scaffold.fasta** under the ./run1/ folder. You can rename the file to Geo.genome.fasta using:
@@ -56,11 +55,12 @@ Create Blobplots:
 For *Chaitophorus*, an extra filtering was used to map the assembly to the Pemphigus assembly
         blastn -query Geo.genome.fasta -db Pem.genome.fasta -out Cha.scaf2genome.out -evalue 1e-10 -outfmt "6 qlen slen qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore" -num_threads 32
 
-Assign scaffolds as Pemphigus contaminations (1) if the scaffold > 1000bp, has 1000 bp alignment and >= 95% identity (2) or if shorter than 1000bp, with >= 95% identity 
+Assign scaffolds as Pemphigus contaminations (1) if the scaffold > 1000bp, has 1000 bp alignment and >= 95% identity (2) or if shorter than 1000bp, with >= 95% identity
+
         perl filter_scaffolds.alignment_only.pl Cha.scaf2genome.out ../blob_taxonomy.blob_out.blobDB.table.txt Cha.scaf2genome.out.list 
         cat Cha.scaf2genome.out.list.Blast Cha.scaf2genome.out.list.Blast.short | awk '{print $3}' | uniq > Cha.PemContam.list
 
-
+Lastly, any 
 
 
   
