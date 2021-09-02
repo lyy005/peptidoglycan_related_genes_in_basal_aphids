@@ -112,9 +112,9 @@ Genome assembly using SPADES
         
 ## 6 - Buchnera genome annotation
 
+## 7 - Buchnera orthologous assignment
 
-
-# 
+ 
 
 
 # Citation
