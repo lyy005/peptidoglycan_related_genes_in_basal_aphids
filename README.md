@@ -24,7 +24,7 @@ We first assembled draft genomes based on the genomic data using SPADES version 
 
 The resulting assemblies are named as **scaffolds.fasta**.
 
-Then we use RNA-seq data to scaffold the draft genome assemblies with P_RNA_scaffolder (https://github.com/CAFS-bioinformatics/P_RNA_scaffolder): 
+Then we use RNA-seq data (mapped with HISAT2 version 2.2.1) to scaffold the draft genome assemblies with P_RNA_scaffolder (https://github.com/CAFS-bioinformatics/P_RNA_scaffolder): 
   
         hisat2 -x scaffolds.fasta -1 Geo_RNA_pe.1.fq.gz -2 Geo_RNA_pe.2.fq.gz -k 3 -p 10 --pen-noncansplice 1000000 -S input.sam
         bash /home/P_RNA_scaffolder/P_RNA_scaffolder.sh -d /home/P_RNA_scaffolder/ -i input.sam -j scaffolds.fasta -F Geo_RNA_pe.1.fq.gz -R Geo_RNA_pe.2.fq.gz -o ./run1/
