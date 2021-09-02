@@ -13,7 +13,7 @@ We cleaned both genomic data and RNA-seq data using Trimmomatic version 0.38. Fo
         # For genomic data
         java -jar trimmomatic-0.38.jar PE -phred33 Geo_1.fastq.gz Geo_2.fastq.gz Geo_pe.1.fq.gz Geo_se.1.fq.gz Geo_pe.2.fq.gz Geo_se.2.fq.gz ILLUMINACLIP:/adapters/combined.fa:2:30:10:8:TRUE LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
         # For RNA-seq data
-        java -jar trimmomatic-0.38.jar PE -phred33 Geo_RNA_1.fastq.gz Geo_RNA_2.fastq.gz Geo_RNA_pe.1.fq.gz Geo_RNA_se.1.fq.gz Geo_RNA_pe.2.fq.gz Geo_RNA_se.2.fq.gz ILLUMINACLIP:/adapters/combined.fa:2:30:10:8:TRUE LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
+        java -jar trimmomatic-0.38.jar PE -phred33 Geo_RNA_1.fastq.gz Geo_RNA_2.fastq.gz Geo_RNA_pe.1.fq.gz Geo_RNA_se.1.fq.gz Geo_RNA_pe.2.fq.gz Geo_RNA_se.2.fq.gz ILLUMINACLIP:/home/Trimmomatic-0.38/adapters/combined.fa.fa:2:30:10:8:TRUE LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
   
 
 ### 1.2 - Genome assembly
@@ -22,10 +22,12 @@ We first assembled draft genomes based on the genomic data using SPADES version 
 
         spades.py -1 Geo_pe.1.fq.gz -2 Geo_pe.2.fq.gz --s1 Geo_se.1.fq.gz --s2 Geo_se.2.fq.gz -o run1_spades_out --threads 48 --memory 300 -k 21,33,55,77,99,127
 
+The resulting assemblies are named as **scaffolds.fasta**.
+
 Then we use RNA-seq data to scaffold the draft genome assemblies with P_RNA_scaffolder (https://github.com/CAFS-bioinformatics/P_RNA_scaffolder): 
   
         hisat2 -x scaffolds.fasta -1 Geo_RNA_pe.1.fq.gz -2 Geo_RNA_pe.2.fq.gz -k 3 -p 10 --pen-noncansplice 1000000 -S input.sam
-        bash /home/P_RNA_scaffolder.sh -d /stor/work/Ochman/yli19/projects/tom_aphid_genomes/bin/P_RNA_scaffolder/P_RNA_scaffolder/ -i input.sam -j discovar.fasta -F Geo_RNA_pe.1.fq.gz -R Geo_RNA_pe.2.fq.gz -o ./run1/
+        bash /home/P_RNA_scaffolder/P_RNA_scaffolder.sh -d /home/P_RNA_scaffolder/ -i input.sam -j scaffolds.fasta -F Geo_RNA_pe.1.fq.gz -R Geo_RNA_pe.2.fq.gz -o ./run1/
   
 The resulting assemblies are named **P_RNA_scaffold.fasta** under the ./run1/ folder. You can rename the file to Geo.genome.fasta using:
         mv P_RNA_scaffold.fasta Geo.genome.fasta
@@ -102,7 +104,12 @@ To assemble the Buchnera genome from Sitobion miscanthi, we downloaded the Illum
 
         fastq-dump --split-files SRR8988435
         
+Genome assembly using SPADES
 
+        java -jar /home/trimmomatic-0.38.jar PE -phred33 Sit.1.fq.gz Sit.2.fq.gz Sit_pe.1.fq.gz Sit_se.1.fq.gz Sit_pe.2.fq.gz Sit_se.2.fq.gz ILLUMINACLIP:/home/Trimmomatic-0.38/adapters/combined.fa:2:30:10:8:TRUE LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36 -threads 72
+
+        /home/SPAdes-3.15.2-Linux/bin/spades.py -1 Sit_pe.1.fq.gz -2 Sit_pe.2.fq.gz --s1 Sit_se.1.fq.gz --s2 Sit_se.2.fq.gz -o run1_spades --threads 100 --memory 900 -k 21,33,55,77,99,127
+        
 ## 6 - Buchnera genome annotation
 
 
