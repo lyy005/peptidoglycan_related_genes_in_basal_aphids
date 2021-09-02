@@ -84,9 +84,24 @@ Gene annotation using BRAKER version 2.1.5 https://github.com/Gaius-Augustus/BRA
 
 ## 3 - Aphid orthologous assignment
 
+Assign genes to orthologous groups using OrthoFinder version 2.5.2 (https://github.com/davidemms/OrthoFinder), including 23 genomes (available on Zenodo). 
+        
+        orthofinder -t 36 -a 36 -f amino_acids_from_23_genomes/
+
+
 ## 4 - Aphid phylogeny construction
 
-## 5 - Buchnera genome assembly
+Reconstruct the phylogenetic tree with 1000 ultrafast bootstraps using IQ-Tree version 2.0.6. Bemisia tabaci (Beta), Diaphorina citri (Dici), Pachypsylla venusta (Pave) were used as outgroups. 
+
+        /home/IQTree/iqtree-2.0.6-Linux/bin/iqtree2 -s Orthogroups.GeneCount.tsv.0.80.concate.fasta -o Beta,Dici,Pave -T 50 -B 1000
+        
+
+## 5 - Sitobion miscanthi Buchnera genome assembly
+
+To assemble the Buchnera genome from Sitobion miscanthi, we downloaded the Illumina reads from NCBI using fastq-dump in NCBI SRA-tools (https://github.com/ncbi/sra-tools). Reads were from a previous Sitobion miscanthi genome sequencing project: https://www.ncbi.nlm.nih.gov/bioproject/PRJNA532495
+
+        fastq-dump --split-files SRR8988435
+        
 
 ## 6 - Buchnera genome annotation
 
