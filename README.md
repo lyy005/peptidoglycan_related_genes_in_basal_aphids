@@ -84,7 +84,7 @@ Gene annotation using BRAKER version 2.1.5 https://github.com/Gaius-Augustus/BRA
 
         time perl /home/BRAKER/scripts/braker.pl --genome P_RNA_scaffold.mask.fasta --bam combined.sorted.bam --softmasking --cores 48 --workingdir run1 --species cha_spadesrna_prot --GENEMARK_PATH=/home/GeneMark/gmes_linux_64/ --prot_seq=protein_evidence_for_annotation.fasta --etpmode --PROTHINT_PATH=/home/ProtHint/ProtHint/bin/
 
-## 3 - Aphid orthologous assignment
+## 3 - Aphid ortholog assignment
 
 Assign genes to orthologous groups using OrthoFinder version 2.5.2 (https://github.com/davidemms/OrthoFinder), including 23 genomes (available on Zenodo). 
         
@@ -112,7 +112,7 @@ Genome assembly using SPADES
         
 ## 6 - Buchnera genome annotation
 
-## 7 - Buchnera orthologous assignment
+## 7 - Buchnera ortholog assignment
 
  
 
