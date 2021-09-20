@@ -128,7 +128,7 @@ https://www.datamonkey.org/busted.
 
 ## 3 - Aphid ortholog assignment
 
-Assign genes to orthologous groups using OrthoFinder version 2.5.2 (https://github.com/davidemms/OrthoFinder), including 23 genomes (available on Zenodo). 
+Assign genes to orthologous groups using OrthoFinder version 2.5.2 (https://github.com/davidemms/OrthoFinder), including 23 genomes (available on Zenodo: https://zenodo.org/record/5517159). 
         
         orthofinder -t 36 -a 36 -f amino_acids_from_23_genomes/
 
@@ -162,7 +162,7 @@ Next, utilize this script within the same directory using the following command:
 
         bash step6_bacteria_genome_annotations.sh
 
-The output are the same annotated bacterial genomes available at https://zenodo.org/record/5484415#.YTob355KgWp
+The output are the same annotated bacterial genomes available at https://zenodo.org/record/5484415
 
 ## 7 - Buchnera ortholog assignment
 
@@ -177,7 +177,7 @@ The output are the input for Step 8.
 
 User must install R and/or RStudio along with the following R packages: tidyverse (v1.3.1), broom (v0.7.8), pheatmap (v1.0.12)
 
-Additionally, the User must include the following files in the parent directory: "All_instances_of_Genes_in_Escherichia_coli_K-12_substr._MG1655.txt" and "aphid_PGN_count.csv". The former was originally downloaded from EcoCyc.org and contains current gene names for E. coli. The latter is the manually created gene counts file from blastp and tblastn searches of insect PGN genes. Both are available at https://zenodo.org/record/5484415#.YTob355KgWp
+Additionally, the User must include the following files in the parent directory: "All_instances_of_Genes_in_Escherichia_coli_K-12_substr._MG1655.txt" and "aphid_PGN_count.csv". The former was originally downloaded from EcoCyc.org and contains current gene names for E. coli. The latter is the manually created gene counts file from blastp and tblastn searches of insect PGN genes. Both are available at https://zenodo.org/record/5484415
 
 Next, utilize this script within the parent directory using the following command: 
 
